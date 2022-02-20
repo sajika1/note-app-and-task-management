@@ -1,23 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import {Routes , Route} from 'react-router-dom';
+
+//? PAGES
+import Create from './Pages/Create';
+import Notes from './Pages/Notes';
+
+// change default MUI theme 
+import {createTheme , ThemeProvider} from '@mui/material';
+import {purple} from '@mui/material/colors';
+
+const theme = createTheme({
+  palette:{
+    secondary:purple
+  },
+  typography:{
+    fontFamily:'Quicksand',
+    fontWeightLight:400,
+    fontWeightRegular:500,
+    fontWeightMedium:600,
+    fontWeightBold:700,
+  }
+})
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path='/' element={<Create />}/>
+          <Route path='/notes' element={<Notes />}/>
+        </Routes>
+      </ThemeProvider>
     </div>
   );
 }
