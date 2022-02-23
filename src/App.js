@@ -8,6 +8,7 @@ import Notes from './Pages/Notes';
 // change default MUI theme 
 import {createTheme , ThemeProvider} from '@mui/material';
 import {purple} from '@mui/material/colors';
+import Layout from './Components/Layout';
 
 const theme = createTheme({
   palette:{
@@ -26,10 +27,12 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <Routes>
-          <Route path='/' element={<Create />}/>
-          <Route path='/notes' element={<Notes />}/>
-        </Routes>
+        <Layout>
+          <Routes>
+              <Route path='/' element={<Create />}/>
+              <Route path='/notes' element={<Notes />}/>
+          </Routes>
+        </Layout>
       </ThemeProvider>
     </div>
   );

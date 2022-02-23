@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 
+import {useNavigate} from 'react-router-dom';
+
 import { Button, Container, FormControlLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
+import axios from 'axios';
 
 const fieldStyle = {
         marginBottom: '20px',
@@ -20,9 +23,7 @@ function Create() {
     const [noteError , setNoteError] = useState(false)
     const [detailsError , setDetailsError] = useState(false)
 
-
-    const [data , setData] = useState({ })
-
+    const navigate = useNavigate();
 
     const submitHandler = (e)=>{
         e.preventDefault();
@@ -39,12 +40,15 @@ function Create() {
         }
 
         if (note && details && categories) {
-            setData({ note, details, categories })
+            axios.post('http://localhost:8000/notes',{ note, details, categories })
+                .then(() => navigate('./notes'))   
         }
     }
 
     return (
-        <Container>  
+        <Container sx={{
+            marginTop:"80px"
+        }}>  
             <Typography
                 style={{margin:'20px 0'}}
                 component= 'h2'
